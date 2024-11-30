@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+set separator none
+left to right direction
+
+package "adapter.in.web" {
+    class con1 as "Controller"
+    class con2 as "Controller"
+}
+
+package "application.port.in" {
+    interface port1 as "Port"
+    interface port2 as "Port"
+    interface port3 as "Port"
+}
+
+package "application.service" {
+    class service1 as "Service"
+    class service2 as "Service"
+}
+
+con1 --> port1
+con2 --> port2
+con2 --> port3
+
+port1 <|-- service1
+port2 <|-- service1
+port3 <|-- service2
+
+@enduml
