@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+set separator none
+left to right direction
+
+skinparam componentStyle rectangle
+
+package "application.service" {
+    ["SendMoneyService"] as sms
+    ["RegisterAccountService"] as ras
+}
+
+package "application.port.out" {
+    ("LoadAccountPort") <<interface>> as lap
+    ("UpdateAccountStatePort") <<interface>> as uasp
+    ("CreateAccountPort") <<interface>> as cap
+}
+
+package "adapter.out.persistence" {
+    ["Persistence Adapter"] as pa
+}
+
+sms --> lap
+sms --> uasp
+ras --> cap
+
+lap <|-- pa
+uasp <|-- pa
+cap <|-- pa
+
+@enduml

@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+set separator none
+left to right direction
+
+skinparam componentStyle rectangle
+
+package "account" {
+    package "application.service" as as1 {
+        ["SendMoneyService"] as sms
+        ["RegisterAccountService"] as ras
+    }
+
+    package "application.port.out" as apo1 {
+        ("LoadAccountPort") <<interface>> as lap
+        ("UpdateAccountStatePort") <<interface>> as uasp
+        ("CreateAccountPort") <<interface>> as cap
+    }
+
+    package "adapter.out.persistence" as aop1 {
+        ["Persistence Adapter"] as pa
+    }
+
+    sms --> lap
+    sms --> uasp
+    ras --> cap
+
+    lap <|-- pa
+    uasp <|-- pa
+    cap <|-- pa
+}
+
+package "billing" {
+    package "application.service" {
+        ["CreateMonthlyInvoiceService"] as cmis
+    }
+
+    package "application.port.out" {
+        ("CreateInvoicePort") <<interface>> as cip
+    }
+
+    package "adapter.out.persistence" {
+        ["BillingPersistenceAdapter"] as bpa
+    }
+
+    cmis --> cip
+
+    cip <|-- bpa
+}
+
+@enduml
