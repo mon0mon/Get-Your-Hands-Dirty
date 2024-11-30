@@ -1,0 +1,47 @@
+@startuml
+class AccountController {
+    - usecase: SendMoneyUseCase
+}
+
+interface SendMoneyUseCase {
+    + sendMoney()
+}
+
+class SendMoneyService {
+    - loadAccountPort : LoadAccountPort
+    - updateAccountPort : UpdateAccountStatePort
+    + sendMoney()
+}
+
+interface LoadAccountPort {
+    + loadAccountBalance()
+}
+
+interface UpdateAccountStatePort {
+    + updateAccountBalance()
+}
+
+class AccountPersistenceAdapter {
+    - repository: SpringDataAccountRepository
+}
+
+interface SpringDataAccountRepository
+
+class Account {
+    - Activity
+}
+
+class Activity
+
+AccountPersistenceAdapter ..> SpringDataAccountRepository
+AccountPersistenceAdapter ..|> LoadAccountPort
+AccountPersistenceAdapter ..|> UpdateAccountStatePort
+
+SendMoneyService ..> AccountPersistenceAdapter
+SendMoneyService ..|> SendMoneyUseCase
+
+AccountController ..> SendMoneyService
+
+SendMoneyService ..> Account
+Account --> Activity
+@enduml
