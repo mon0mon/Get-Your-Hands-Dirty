@@ -1,4 +1,4 @@
-package com.mon0mon.makingcleanarchitecture.account.domain;
+package com.mon0mon.makingcleanarchitecture.application.domain.model;
 
 import lombok.NonNull;
 
