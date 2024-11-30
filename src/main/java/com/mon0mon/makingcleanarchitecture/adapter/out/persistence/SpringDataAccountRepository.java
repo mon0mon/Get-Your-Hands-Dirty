@@ -1,4 +1,7 @@
 package com.mon0mon.makingcleanarchitecture.adapter.out.persistence;
 
-public interface SpringDataAccountRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+interface SpringDataAccountRepository extends JpaRepository<AccountJpaEntity, Long> {
 }
+

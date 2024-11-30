@@ -3,6 +3,7 @@ package com.mon0mon.makingcleanarchitecture.application.domain.model;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.*;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Account {
@@ -30,6 +31,10 @@ public class Account {
             Money baselineBalance,
             ActivityWindow activityWindow) {
         return new Account(accountId, baselineBalance, activityWindow);
+    }
+
+    public Optional<AccountId> getId() {
+        return Optional.ofNullable(this.id);
     }
 
     public Money calculateBalance() {
