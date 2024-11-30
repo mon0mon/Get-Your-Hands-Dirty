@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+set separator none
+
+package "application.port.in" {
+    interface usecase as "SendMoneyUseCase"
+    class command as "SendMoneyCommand"
+
+    usecase <.. command
+}
+
+package "application.service" {
+    class service as "SendMoneyService"
+}
+
+package "domain" {
+    class account as "Account"
+}
+
+package "application.port.out" {
+    interface op as "UpdateAccountStatePort"
+}
+
+service -left-> usecase
+service -down-> account
+service -right-> op
+
+@enduml
