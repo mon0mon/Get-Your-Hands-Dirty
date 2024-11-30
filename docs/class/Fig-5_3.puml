@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+set separator none
+left to right direction
+
+package "adapter.in.web" {
+    class con as "Controller"
+    class ws_con as "WebSocket Controller"
+}
+
+package "application.port.in" {
+    interface ip as "Port" #text:tomato
+}
+
+package "application.port.out" {
+    interface op as "Port" #text:royalblue
+}
+
+package "application.service" {
+    class service1 as "Service"
+    class service2 as "Service"
+}
+
+con --> ip
+ws_con --> ip
+ip <|-- service1
+
+ws_con --|> op
+op <-- service2
+
+note as N1
+    <b>제어 흐름</b> 방향 주의
+    <color:tomato>Incoming Port</color>에서는 Controller -> Port -> Service
+    <color:royalblue>Outgoing Port</color>에서는 Service -> Port -> Controller
+endnote
+
+@enduml

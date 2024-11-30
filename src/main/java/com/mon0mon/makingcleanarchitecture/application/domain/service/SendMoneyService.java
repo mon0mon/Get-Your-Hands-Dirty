@@ -5,11 +5,13 @@ import com.mon0mon.makingcleanarchitecture.application.port.in.SendMoneyUseCase;
 import com.mon0mon.makingcleanarchitecture.application.port.out.AccountLock;
 import com.mon0mon.makingcleanarchitecture.application.port.out.LoadAccountPort;
 import com.mon0mon.makingcleanarchitecture.application.port.out.UpdateAccountStatePort;
+import com.mon0mon.makingcleanarchitecture.common.UseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Transactional
+@UseCase
 public class SendMoneyService implements SendMoneyUseCase {
     private final LoadAccountPort loadAccountPort;
     private final AccountLock accountLock;
