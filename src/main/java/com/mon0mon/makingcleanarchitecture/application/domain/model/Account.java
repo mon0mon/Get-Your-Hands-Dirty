@@ -62,7 +62,7 @@ public class Account {
         return Money.add(
                             this.calculateBalance(),
                             money.negate())
-                    .isPositive();
+                    .isPositiveOrZero();
     }
 
     public boolean deposit(Money money, AccountId sourceAccountId) {
