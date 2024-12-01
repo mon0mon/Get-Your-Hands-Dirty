@@ -14,7 +14,7 @@ class DependencyRuleTests {
 
                              .withDomainLayer("application.domain")
 
-                             .withAdaptersLayer("com/mon0mon/makingcleanarchitecture/adapter")
+                             .withAdaptersLayer("adapter")
                              .incoming("in.web")
                              .outgoing("out.persistence")
                              .and()
