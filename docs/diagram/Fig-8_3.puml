@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+skinparam componentStyle rectangle
+skinparam linetype ortho
+
+
+rectangle #line.dashed {
+    [Account Controller] as ac
+    [WebModel] as wm
+}
+
+rectangle #line.dashed {
+    (SendMoneyUseCase) <<interface>> as smuc
+    [SendMoneyCommand] as smc
+    [SendMoneyService] as sms
+    (UpdateAccountStatePort) <<interface>> as uasp
+    [UpdateAccountStateCommand] as uasc
+}
+
+rectangle #line.dashed {
+    [AccountPersistenceAdapter] as apa
+    [PersistenceModel] as pm
+}
+
+rectangle #line.dashed {
+    [Account] as acc
+}
+
+
+ac --> wm
+
+ac -> smuc
+smuc <|- sms
+sms -> uasp
+
+smuc --> smc
+sms -up-> acc
+uasp --> uasc
+
+uasp <|- apa
+
+apa --> pm
+
+@enduml
